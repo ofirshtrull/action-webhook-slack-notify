@@ -1,7 +1,5 @@
-This action is a part of [GitHub Actions Library](https://github.com/rtCamp/github-actions-library/) created by [rtCamp](https://github.com/rtCamp/).
-
 # Slack Notify - GitHub Action
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public..](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
 
 A [GitHub Action](https://github.com/features/actions) to send a message to a Slack channel.
@@ -9,8 +7,6 @@ A [GitHub Action](https://github.com/features/actions) to send a message to a Sl
 **Screenshot**
 
 <img width="485" alt="action-slack-notify-rtcamp" src="https://user-images.githubusercontent.com/4115/54996943-9d38c700-4ff0-11e9-9d35-7e2c16ef0d62.png">
-
-The `Site` and `SSH Host` details are only available if this action is run after [Deploy WordPress GitHub action](https://github.com/rtCamp/action-deploy-wordpress).
 
 ## Usage
 
@@ -109,6 +105,13 @@ In the Vault, the Slack webhook should be setup as field `webhook` on path `secr
 
 [MIT](LICENSE) © 2019 rtCamp
 
-## Does this interest you?
+This action was forked from https://github.com/rtCamp/action-slack-notify created by [rtCamp](https://github.com/rtCamp/).
 
-<a href="https://rtcamp.com/"><img src="https://rtcamp.com/wp-content/uploads/2019/04/github-banner@2x.png" alt="Join us at rtCamp, we specialize in providing high performance enterprise WordPress solutions"></a>
+### Made with love and coffe! @ [PartnerHero](https://partnerhero.com/)
+
+<a
+  href="https://partnerhero.com/">
+  <img
+    src="https://partnerhero.com/static/ph-logo-red-74c934089759f0f99f33e26cd77baf06.svg"
+    alt="Outsourcing for Startups. From bootstrap through IPO and beyond. We’ve got you.">
+</a>
