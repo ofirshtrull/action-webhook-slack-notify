@@ -19,8 +19,8 @@ const (
 	EnvSlackUserName  = "SLACK_USERNAME"
 	EnvGithubActor    = "GITHUB_ACTOR"
 	EnvSiteName       = "SITE_NAME"
-	EnvHostName       = "HOST_NAME"
-	EnvDepolyPath     = "DEPLOY_PATH"
+	EnvSiteURL       = "SITE_URL"
+	EnvShowActionsUrl = "SHOW_ACTIONS_URL"
 )
 
 type Webhook struct {
@@ -74,32 +74,40 @@ func main() {
 			Short: true,
 		},
 		{
-			Title: "Actions URL",
-			Value: "https://github.com/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_SHA") + "/checks",
-			Short: false,
-		},
-		{
 			Title: os.Getenv(EnvSlackTitle),
 			Value: envOr(EnvSlackMessage, "EOM"),
 			Short: false,
 		},
 	}
 
-	hostName := os.Getenv(EnvHostName)
-	if hostName != "" {
-		newfields:= []Field{
-			{
-				Title: os.Getenv("SITE_TITLE"),
-				Value: os.Getenv(EnvSiteName),
-				Short: true,
-			},
-			{
-				Title: os.Getenv("HOST_TITLE"),
-				Value: os.Getenv(EnvHostName),
-				Short: true,
-			},
+	showActionsUrl := os.Getenv(EnvShowActionsUrl);
+	if (showActionsUrl == "true") {
+		actionsUrlField := Field{
+			Title: "Actions URL",
+			Value: "https://github.com/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_SHA") + "/checks",
+			Short: false,
 		}
-		fields = append(newfields, fields...)
+		fields = append(fields, actionsUrlField)
+	}
+
+	siteName := os.Getenv(EnvSiteName)
+	if siteName != "" {
+		siteNameField := Field{
+			Title: "Site",
+			Value: os.Getenv(EnvSiteName),
+			Short: true,
+		}
+		fields = append(fields, siteNameField)
+	}
+
+	siteUrl := os.Getenv(EnvSiteURL)
+	if siteUrl != "" {
+		siteUrlField:= Field{
+			Title: "Site URL",
+			Value: os.Getenv(EnvSiteURL),
+			Short: true,
+		}
+		fields = append(fields, siteUrlField)
 	}
 
 	msg := Webhook{

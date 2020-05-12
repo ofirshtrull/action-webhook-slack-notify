@@ -46,20 +46,26 @@ SLACK_ICON_EMOJI  | -                                                     | User
 SLACK_COLOR       | `good` (green)                                        | You can pass an RGB value like `#efefef` which would change color on left side vertical line of Slack message.
 SLACK_MESSAGE     | Generated from git commit message.                    | The main Slack message in attachment. It is advised not to override this.
 SLACK_TITLE       | Message                                               | Title to use before main Slack message.
+SHOW_ACTIONS_URL  | true                                                  | Show the actions url field
+SITE_NAME         | development                                           | Environment sitename
+SITE_URL          | -                                                     | Site URL
 
 You can see the action block with all variables as below:
 
 ```yml
     - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2.0.0
+      uses: partnerhero/action-slack-notify@v2.0.0
       env:
         SLACK_CHANNEL: general
         SLACK_COLOR: '#3278BD'
         SLACK_ICON: https://github.com/rtCamp.png?size=48
         SLACK_MESSAGE: 'Post Content :rocket:'
         SLACK_TITLE: Post Title
-        SLACK_USERNAME: rtCamp
+        SLACK_USERNAME: Devops Bot
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SHOW_ACTIONS_URL: true
+        SITE_NAME: staging
+        SITE_URL: http://myapp.staging.com
 ```
 
 Below screenshot help you visualize message part controlled by different variables:
