@@ -91,7 +91,7 @@ func main() {
 	if showActionsUrl == "true" {
 		actionsUrlField := Field{
 			Title: "Actions URL",
-			Value: "https://github.com/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_SHA") + "/checks",
+			Value: "https://github.com/" + os.Getenv("GITHUB_REPOSITORY") + "/actions/runs/" + os.Getenv("GITHUB_RUN_ID"),
 			Short: false,
 		}
 		fields = append(fields, actionsUrlField)
