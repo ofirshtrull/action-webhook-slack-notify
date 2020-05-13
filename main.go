@@ -87,6 +87,24 @@ func main() {
 		fields = append([]Field { refField }, fields...)
 	}
 
+	githubEventName := os.Getenv("GITHUB_EVENT_NAME")
+	
+	if githubEventName == "pull_request" {
+		branchNameField := Field{
+			Title: "Branch",
+			Value: os.Getenv("GITHUB_BRANCH"),
+			Short: false,
+		}
+		fields = append(fields, branchNameField)
+	} else if githubEventName == "push" {
+		commitMessageField := Field{
+			Title: "Commit Message",
+			Value: os.Getenv("COMMIT_MESSAGE"),
+			Short: false,
+		}
+		fields = append(fields, commitMessageField)
+	}
+
 	showActionsUrl := os.Getenv(EnvShowActionsUrl)
 	if showActionsUrl == "true" {
 		actionsUrlField := Field{
