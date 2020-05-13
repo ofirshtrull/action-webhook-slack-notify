@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 export GITHUB_BRANCH=${GITHUB_REF##*heads/}
-export SLACK_ICON=${SLACK_ICON:-"https://avatars0.githubusercontent.com/u/43742164"}
 export SLACK_USERNAME=${SLACK_USERNAME:-"DevOps Bot"}
 export CI_SCRIPT_OPTIONS="ci_script_options"
 export SLACK_TITLE=${SLACK_TITLE:-"Message"}
-export SITE_NAME=${SITE_NAME:-"development"}
+export SITE_NAME=${SITE_NAME:-""}
 export SITE_URL=${SITE_URL:-""}
 export SHOW_ACTIONS_URL=${SHOW_ACTIONS_URL:-"true"}
 export SHOW_REF=${SHOW_REF:-"true"}

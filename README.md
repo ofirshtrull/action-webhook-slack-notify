@@ -6,7 +6,7 @@ A [GitHub Action](https://github.com/features/actions) to send a message to a Sl
 
 **Screenshot**
 
-<img width="485" alt="action-slack-notify-rtcamp" src="https://user-images.githubusercontent.com/4115/54996943-9d38c700-4ff0-11e9-9d35-7e2c16ef0d62.png">
+<img width="485" alt="action-slack-notify-rtcamp" src="https://i.ibb.co/tP48n6n/Screenshot-from-2020-05-13-14-35-10.png">
 
 ## Usage
 
@@ -41,7 +41,6 @@ Variable          | Default                                               | Purp
 ------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------
 SLACK_CHANNEL     | Set during Slack webhook creation                     | Specify Slack channel in which message needs to be sent
 SLACK_USERNAME    | `DevOpsBot`                                           | The name of the sender of the message. Does not need to be a "real" username
-SLACK_ICON        | ![rtBot Avatar](https://github.com/rtBot.png?size=32) | User/Bot icon shown with Slack message. It uses the URL supplied to this env variable to display the icon in slack message.
 SLACK_ICON_EMOJI  | -                                                     | User/Bot icon shown with Slack message, in case you do not wish to add a URL for slack icon as above, you can set slack emoji in this env variable. Example value: `:bell:` or any other valid slack emoji.
 SLACK_COLOR       | `good` (green)                                        | You can pass an RGB value like `#efefef` which would change color on left side vertical line of Slack message.
 SLACK_MESSAGE     | Generated from git commit message.                    | The main Slack message in attachment. It is advised not to override this.
@@ -59,7 +58,6 @@ You can see the action block with all variables as below:
       env:
         SLACK_CHANNEL: general
         SLACK_COLOR: '#3278BD'
-        SLACK_ICON: https://github.com/rtCamp.png?size=48
         SLACK_MESSAGE: 'Post Content :rocket:'
         SLACK_TITLE: Post Title
         SLACK_USERNAME: Devops Bot
@@ -71,8 +69,6 @@ You can see the action block with all variables as below:
 ```
 
 Below screenshot help you visualize message part controlled by different variables:
-
-<img width="600" alt="Screenshot_2019-03-26_at_5_56_05_PM" src="https://user-images.githubusercontent.com/4115/54997488-d1f94e00-4ff1-11e9-897f-a35ab90f525f.png">
 
 ## Hashicorp Vault (Optional)
 
@@ -113,7 +109,7 @@ In the Vault, the Slack webhook should be setup as field `webhook` on path `secr
 
 This action was forked from https://github.com/rtCamp/action-slack-notify created by [rtCamp](https://github.com/rtCamp/).
 
-### Made with love and coffe! @ [PartnerHero](https://partnerhero.com/)
+### Made with love and coffee! @ [PartnerHero](https://partnerhero.com/)
 
 <a
   href="https://partnerhero.com/">
