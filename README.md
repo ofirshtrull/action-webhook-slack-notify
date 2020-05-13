@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2.0.0
+      uses: partnerhero/action-slack-notify@v2.0.0
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 ```
@@ -46,9 +46,10 @@ SLACK_ICON_EMOJI  | -                                                     | User
 SLACK_COLOR       | `good` (green)                                        | You can pass an RGB value like `#efefef` which would change color on left side vertical line of Slack message.
 SLACK_MESSAGE     | Generated from git commit message.                    | The main Slack message in attachment. It is advised not to override this.
 SLACK_TITLE       | Message                                               | Title to use before main Slack message.
-SHOW_ACTIONS_URL  | true                                                  | Show the actions url field
-SITE_NAME         | development                                           | Environment sitename
+SITE_NAME         | -                                                     | Environment sitename
 SITE_URL          | -                                                     | Site URL
+SHOW_ACTIONS_URL  | true                                                  | Show the actions url field
+SHOW_REF          | true                                                  | Show the ref field
 
 You can see the action block with all variables as below:
 
@@ -63,16 +64,15 @@ You can see the action block with all variables as below:
         SLACK_TITLE: Post Title
         SLACK_USERNAME: Devops Bot
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SHOW_ACTIONS_URL: true
         SITE_NAME: staging
         SITE_URL: http://myapp.staging.com
+        SHOW_ACTIONS_URL: true
+        SHOW_REF: true
 ```
 
 Below screenshot help you visualize message part controlled by different variables:
 
 <img width="600" alt="Screenshot_2019-03-26_at_5_56_05_PM" src="https://user-images.githubusercontent.com/4115/54997488-d1f94e00-4ff1-11e9-897f-a35ab90f525f.png">
-
-The `Site` and `SSH Host` details are only available if this action is run after [Deploy WordPress GitHub action](https://github.com/rtCamp/action-deploy-wordpress).
 
 ## Hashicorp Vault (Optional)
 

@@ -7,6 +7,8 @@ export CI_SCRIPT_OPTIONS="ci_script_options"
 export SLACK_TITLE=${SLACK_TITLE:-"Message"}
 export SITE_NAME=${SITE_NAME:-"development"}
 export SITE_URL=${SITE_URL:-""}
+export SHOW_ACTIONS_URL=${SHOW_ACTIONS_URL:-"true"}
+export SHOW_REF=${SHOW_REF:-"true"}
 export COMMIT_MESSAGE=$(cat "/github/workflow/event.json" | jq .commits | jq '.[0].message' -r)
 
 hosts_file="$GITHUB_WORKSPACE/.github/hosts.yml"

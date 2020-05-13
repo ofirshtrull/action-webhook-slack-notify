@@ -21,6 +21,7 @@ const (
 	EnvSiteName       = "SITE_NAME"
 	EnvSiteURL       = "SITE_URL"
 	EnvShowActionsUrl = "SHOW_ACTIONS_URL"
+	EnvShowRef = "SHOW_REF"
 )
 
 type Webhook struct {
@@ -65,10 +66,6 @@ func main() {
 
 	fields:= []Field{
 		{
-			Title: "Ref",
-			Value: os.Getenv("GITHUB_REF"),
-			Short: true,
-		},                {
 			Title: "Event",
 			Value: os.Getenv("GITHUB_EVENT_NAME"),
 			Short: true,
@@ -80,8 +77,18 @@ func main() {
 		},
 	}
 
-	showActionsUrl := os.Getenv(EnvShowActionsUrl);
-	if (showActionsUrl == "true") {
+	showRef := os.Getenv(EnvShowRef)
+	if showRef == "true" {
+		refField := Field{
+			Title: "Ref",
+			Value: os.Getenv("GITHUB_REF"),
+			Short: true,
+		}
+		fields = append([]Field { refField }, fields...)
+	}
+
+	showActionsUrl := os.Getenv(EnvShowActionsUrl)
+	if showActionsUrl == "true" {
 		actionsUrlField := Field{
 			Title: "Actions URL",
 			Value: "https://github.com/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_SHA") + "/checks",
@@ -122,7 +129,7 @@ func main() {
 				AuthorName: envOr(EnvGithubActor, ""),
 				AuthorLink: "http://github.com/" + os.Getenv(EnvGithubActor),
 				AuthorIcon: "http://github.com/" + os.Getenv(EnvGithubActor) + ".png?size=32",
-				Footer: "<https://github.com/partnerhero/github-actions-library|Powered By PartnerHero's GitHub Actions Library>",
+				Footer: "<https://github.com/partnerhero/action-webhook-slack-notify|Powered By PartnerHero's GitHub Actions Library>",
 				Fields: fields,
 			},
 		},
