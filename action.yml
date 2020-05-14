@@ -3,7 +3,7 @@ description: 'This action will send a notification to Slack'
 author: 'PartnerHero'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://partnerhero/action-webhook-slack-notify:v2.1.0'
 branding:
   icon: 'code'
   color: 'red'
