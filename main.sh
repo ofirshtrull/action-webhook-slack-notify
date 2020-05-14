@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export GITHUB_BRANCH=${GITHUB_REF##*heads/}
+export GITHUB_BRANCH=${GITHUB_HEAD_REF##*heads/}
 export SLACK_USERNAME=${SLACK_USERNAME:-"DevOps Bot"}
 export CI_SCRIPT_OPTIONS="ci_script_options"
 export SLACK_TITLE=${SLACK_TITLE:-"Message"}

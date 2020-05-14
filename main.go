@@ -93,14 +93,14 @@ func main() {
 		branchNameField := Field{
 			Title: "Branch",
 			Value: os.Getenv("GITHUB_BRANCH"),
-			Short: false,
+			Short: true,
 		}
 		fields = append(fields, branchNameField)
 	} else if githubEventName == "push" {
 		commitMessageField := Field{
 			Title: "Commit Message",
 			Value: os.Getenv("COMMIT_MESSAGE"),
-			Short: false,
+			Short: true,
 		}
 		fields = append(fields, commitMessageField)
 	}
