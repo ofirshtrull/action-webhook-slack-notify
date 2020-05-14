@@ -43,7 +43,7 @@ SLACK_CHANNEL     | Set during Slack webhook creation                     | Spec
 SLACK_USERNAME    | `DevOpsBot`                                           | The name of the sender of the message. Does not need to be a "real" username
 SLACK_ICON_EMOJI  | -                                                     | User/Bot icon shown with Slack message, in case you do not wish to add a URL for slack icon as above, you can set slack emoji in this env variable. Example value: `:bell:` or any other valid slack emoji.
 SLACK_COLOR       | `good` (green)                                        | You can pass an RGB value like `#efefef` which would change color on left side vertical line of Slack message.
-SLACK_MESSAGE     | Generated from git commit message.                    | The main Slack message in attachment. It is advised not to override this.
+SLACK_MESSAGE     | Generated from git commit message.                    | The main Slack message in attachment.
 SLACK_TITLE       | Message                                               | Title to use before main Slack message.
 SITE_NAME         | -                                                     | Environment site name
 SITE_URL          | -                                                     | Site URL
@@ -109,7 +109,7 @@ In the Vault, the Slack webhook should be setup as field `webhook` on path `secr
 
 This action was forked from https://github.com/rtCamp/action-slack-notify created by [rtCamp](https://github.com/rtCamp/).
 
-### Made with love and coffee! @ [PartnerHero](https://partnerhero.com/)
+### Made with love and &#127861; @ [PartnerHero](https://partnerhero.com/)
 
 <a
   href="https://partnerhero.com/">
