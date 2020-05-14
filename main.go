@@ -22,6 +22,7 @@ const (
 	EnvSiteURL       = "SITE_URL"
 	EnvShowActionsUrl = "SHOW_ACTIONS_URL"
 	EnvShowRef = "SHOW_REF"
+	EnvShowEvent = "SHOW_EVENT"
 )
 
 type Webhook struct {
@@ -66,11 +67,6 @@ func main() {
 
 	fields:= []Field{
 		{
-			Title: "Event",
-			Value: os.Getenv("GITHUB_EVENT_NAME"),
-			Short: true,
-		},
-		{
 			Title: os.Getenv(EnvSlackTitle),
 			Value: envOr(EnvSlackMessage, "EOM"),
 			Short: false,
@@ -87,8 +83,17 @@ func main() {
 		fields = append([]Field { refField }, fields...)
 	}
 
+    showEvent := os.Getenv(EnvShowEvent)
+    if showEvent == "true" {
+        eventField := Field{
+            Title: "Event",
+            Value: os.Getenv("GITHUB_EVENT_NAME"),
+            Short: true,
+        }
+        fields = append(fields, eventField)
+    }
+
 	githubEventName := os.Getenv("GITHUB_EVENT_NAME")
-	
 	if githubEventName == "pull_request" {
 		branchNameField := Field{
 			Title: "Branch",

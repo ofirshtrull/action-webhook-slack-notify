@@ -8,6 +8,7 @@ export SITE_NAME=${SITE_NAME:-""}
 export SITE_URL=${SITE_URL:-""}
 export SHOW_ACTIONS_URL=${SHOW_ACTIONS_URL:-"true"}
 export SHOW_REF=${SHOW_REF:-"true"}
+export SHOW_EVENT=${SHOW_EVENT:-"true"}
 export COMMIT_MESSAGE=$(cat "/github/workflow/event.json" | jq .commits | jq '.[0].message' -r)
 
 hosts_file="$GITHUB_WORKSPACE/.github/hosts.yml"

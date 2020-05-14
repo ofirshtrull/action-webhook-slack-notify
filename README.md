@@ -45,10 +45,11 @@ SLACK_ICON_EMOJI  | -                                                     | User
 SLACK_COLOR       | `good` (green)                                        | You can pass an RGB value like `#efefef` which would change color on left side vertical line of Slack message.
 SLACK_MESSAGE     | Generated from git commit message.                    | The main Slack message in attachment. It is advised not to override this.
 SLACK_TITLE       | Message                                               | Title to use before main Slack message.
-SITE_NAME         | -                                                     | Environment sitename
+SITE_NAME         | -                                                     | Environment site name
 SITE_URL          | -                                                     | Site URL
 SHOW_ACTIONS_URL  | true                                                  | Show the actions url field
 SHOW_REF          | true                                                  | Show the ref field
+SHOW_EVENT        | true                                                  | Show the event that triggered the workflow
 
 You can see the action block with all variables as below:
 
@@ -66,9 +67,8 @@ You can see the action block with all variables as below:
         SITE_URL: http://myapp.staging.com
         SHOW_ACTIONS_URL: true
         SHOW_REF: true
+        SHOW_EVENT: true
 ```
-
-Below screenshot help you visualize message part controlled by different variables:
 
 ## Hashicorp Vault (Optional)
 
