@@ -19,8 +19,10 @@ const (
 	EnvSlackUserName  = "SLACK_USERNAME"
 	EnvGithubActor    = "GITHUB_ACTOR"
 	EnvSiteName       = "SITE_NAME"
-	EnvHostName       = "HOST_NAME"
-	EnvDepolyPath     = "DEPLOY_PATH"
+	EnvSiteURL       = "SITE_URL"
+	EnvShowActionsUrl = "SHOW_ACTIONS_URL"
+	EnvShowRef = "SHOW_REF"
+	EnvShowEvent = "SHOW_EVENT"
 )
 
 type Webhook struct {
@@ -65,41 +67,77 @@ func main() {
 
 	fields:= []Field{
 		{
-			Title: "Ref",
-			Value: os.Getenv("GITHUB_REF"),
-			Short: true,
-		},                {
-			Title: "Event",
-			Value: os.Getenv("GITHUB_EVENT_NAME"),
-			Short: true,
-		},
-		{
-			Title: "Actions URL",
-			Value: "https://github.com/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + os.Getenv("GITHUB_SHA") + "/checks",
-			Short: false,
-		},
-		{
 			Title: os.Getenv(EnvSlackTitle),
 			Value: envOr(EnvSlackMessage, "EOM"),
 			Short: false,
 		},
 	}
 
-	hostName := os.Getenv(EnvHostName)
-	if hostName != "" {
-		newfields:= []Field{
-			{
-				Title: os.Getenv("SITE_TITLE"),
-				Value: os.Getenv(EnvSiteName),
-				Short: true,
-			},
-			{
-				Title: os.Getenv("HOST_TITLE"),
-				Value: os.Getenv(EnvHostName),
-				Short: true,
-			},
+	showRef := os.Getenv(EnvShowRef)
+	if showRef == "true" {
+		refField := Field{
+			Title: "Ref",
+			Value: os.Getenv("GITHUB_REF"),
+			Short: true,
 		}
-		fields = append(newfields, fields...)
+		fields = append([]Field { refField }, fields...)
+	}
+
+    showEvent := os.Getenv(EnvShowEvent)
+    if showEvent == "true" {
+        eventField := Field{
+            Title: "Event",
+            Value: os.Getenv("GITHUB_EVENT_NAME"),
+            Short: true,
+        }
+        fields = append(fields, eventField)
+    }
+
+	githubEventName := os.Getenv("GITHUB_EVENT_NAME")
+	if githubEventName == "pull_request" {
+		branchNameField := Field{
+			Title: "Branch",
+			Value: os.Getenv("GITHUB_BRANCH"),
+			Short: true,
+		}
+		fields = append(fields, branchNameField)
+	} else if githubEventName == "push" {
+		commitMessageField := Field{
+			Title: "Commit Message",
+			Value: os.Getenv("COMMIT_MESSAGE"),
+			Short: true,
+		}
+		fields = append(fields, commitMessageField)
+	}
+
+	showActionsUrl := os.Getenv(EnvShowActionsUrl)
+	if showActionsUrl == "true" {
+		actionsUrlField := Field{
+			Title: "Actions URL",
+			Value: "https://github.com/" + os.Getenv("GITHUB_REPOSITORY") + "/actions/runs/" + os.Getenv("GITHUB_RUN_ID"),
+			Short: false,
+		}
+		fields = append(fields, actionsUrlField)
+	}
+
+	siteName := os.Getenv(EnvSiteName)
+	if siteName != "" {
+		siteNameField := Field{
+			Title: "Site",
+			Value: os.Getenv(EnvSiteName),
+			Short: true,
+		}
+		fields = append(fields, siteNameField)
+	}
+
+	siteUrl := os.Getenv(EnvSiteURL)
+	if siteUrl != "" {
+		siteUrlField:= Field{
+			Title: "Site URL",
+			Value: os.Getenv(EnvSiteURL),
+			Short: true,
+		}
+		fields = append(fields, siteUrlField)
 	}
 
 	msg := Webhook{
@@ -114,7 +152,7 @@ func main() {
 				AuthorName: envOr(EnvGithubActor, ""),
 				AuthorLink: "http://github.com/" + os.Getenv(EnvGithubActor),
 				AuthorIcon: "http://github.com/" + os.Getenv(EnvGithubActor) + ".png?size=32",
-				Footer: "<https://github.com/rtCamp/github-actions-library|Powered By rtCamp's GitHub Actions Library>",
+				Footer: "<https://github.com/partnerhero/action-webhook-slack-notify|Powered By PartnerHero's GitHub Actions Library>",
 				Fields: fields,
 			},
 		},

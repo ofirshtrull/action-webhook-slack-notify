@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
-export GITHUB_BRANCH=${GITHUB_REF##*heads/}
-export SLACK_ICON=${SLACK_ICON:-"https://avatars0.githubusercontent.com/u/43742164"}
-export SLACK_USERNAME=${SLACK_USERNAME:-"rtBot"}
+export GITHUB_BRANCH=${GITHUB_HEAD_REF##*heads/}
+export SLACK_USERNAME=${SLACK_USERNAME:-"DevOps Bot"}
 export CI_SCRIPT_OPTIONS="ci_script_options"
 export SLACK_TITLE=${SLACK_TITLE:-"Message"}
+export SITE_NAME=${SITE_NAME:-""}
+export SITE_URL=${SITE_URL:-""}
+export SHOW_ACTIONS_URL=${SHOW_ACTIONS_URL:-"true"}
+export SHOW_REF=${SHOW_REF:-"true"}
+export SHOW_EVENT=${SHOW_EVENT:-"true"}
 export COMMIT_MESSAGE=$(cat "/github/workflow/event.json" | jq .commits | jq '.[0].message' -r)
 
 hosts_file="$GITHUB_WORKSPACE/.github/hosts.yml"
@@ -48,13 +52,9 @@ if [[ -f "$k8s_site_hostname" ]]; then
     export HOST_TITLE="Cluster"
 fi
 
-if [[ -n "$SITE_NAME" ]]; then
-    export SITE_TITLE="Site"
-fi
-
 
 if [[ -z "$SLACK_MESSAGE" ]]; then
 	export SLACK_MESSAGE="$COMMIT_MESSAGE"
 fi
 
-slack-notify "$@"
+webhook-slack-notify "$@"
