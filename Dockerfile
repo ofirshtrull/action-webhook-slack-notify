@@ -15,12 +15,14 @@ ENV GOOS linux
 RUN go get -v ./...
 RUN go build -a -installsuffix cgo -ldflags '-w  -extldflags "-static"' -o /go/bin/webhook-slack-notify .
 
-# alpine:latest at 2019-01-04T21:27:39IST
-FROM alpine@sha256:46e71df1e5191ab8b8034c5189e325258ec44ea739bba1e5645cff83c9048ff1
+FROM alpine:3.18.2
 
 COPY --from=builder /go/bin/webhook-slack-notify /usr/bin/webhook-slack-notify
 
 ENV VAULT_VERSION 1.0.2
+ENV PYTHONUNBUFFERED=1
+
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
 
 RUN apk update \
 	&& apk upgrade \
@@ -28,11 +30,19 @@ RUN apk update \
 	bash \
 	jq \
 	ca-certificates \
-	python \
-	py2-pip \
-	rsync && \
-	pip install shyaml && \
-	rm -rf /var/cache/apk/*
+	rsync
+
+
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools shyaml # py2-pip
+#  && \
+# 	pip install shyaml && \
+# 	rm -rf /var/cache/apk/*
+# 	python
+# \
+# py2-pip \
+
+
 
 # Setup Vault
 RUN wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip && \

@@ -1,9 +1,9 @@
 name: 'Webhook Slack Notify'
 description: 'This action will send a notification to Slack'
-author: 'PartnerHero'
+author: 'ofirshtrull'
 runs:
   using: 'docker'
-  image: 'docker://partnerhero/action-webhook-slack-notify:v2.1.0'
+  image: 'docker://ofirshtrull/action-webhook-slack-notify:v0.0.2'
 branding:
   icon: 'code'
   color: 'red'
